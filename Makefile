@@ -5,3 +5,6 @@ zip:
 	make build-linux-amd64
 	zip lambda-handler.zip app
 	rm app
+
+test:
+	go test -v ./...
