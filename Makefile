@@ -1,10 +1,14 @@
-build-linux-amd64:
+build:
 	GOOS=linux GOARCH=amd64 go build -C cmd/app -o ../../bootstrap
 
 zip:
-	make build-linux-amd64
 	zip lambda-handler.zip bootstrap
-	rm bootstrap
+
+clean:
+	rm -rf bootstrap lambda-handler.zip
+
+deploy:
+	aws lambda update-function-code --function-name todo-list --zip-file fileb://./lambda-handler.zip
 
 test:
 	go test -v ./...
