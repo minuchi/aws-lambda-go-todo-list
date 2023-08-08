@@ -22,3 +22,8 @@ variable "api_gateway_description" {
   description = "Lambda function description"
   default     = "A To-Do List"
 }
+
+variable "NEW_RELIC_LICENSE_KEY" {
+  description = "New Relic license key"
+  default     = ""
+}

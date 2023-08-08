@@ -1,6 +1,8 @@
 package handlers
 
 import (
+	"fmt"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
 )
@@ -11,6 +13,7 @@ type ToDo struct {
 }
 
 func GetHealth(c *fiber.Ctx) error {
+	fmt.Println(c.GetReqHeaders())
 	return c.JSON(fiber.Map{
 		"ok": true,
 	})

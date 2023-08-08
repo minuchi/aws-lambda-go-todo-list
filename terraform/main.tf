@@ -12,7 +12,22 @@ module "lambda_function" {
   runtime       = "go1.x"
 
   create_package         = false
-  local_existing_package = "this_is_for_terraform_apply.zip"
+  local_existing_package = "../lambda-handler.zip"
+
+  create_unqualified_alias_allowed_triggers = true
+
+  allowed_triggers = {
+    APIGatewayAny = {
+      service    = "apigateway"
+      source_arn = "${module.api_gateway.apigatewayv2_api_execution_arn}/*/*/*"
+    }
+  }
+
+  create_current_version_allowed_triggers = false
+
+  environment_variables = {
+    "NEW_RELIC_LICENSE_KEY" = var.NEW_RELIC_LICENSE_KEY
+  }
 
   tags = {
     Name = var.lambda_function_name
@@ -27,12 +42,32 @@ module "api_gateway" {
   protocol_type = "HTTP"
 
   cors_configuration = {
-    allow_headers = ["content-type", "x-amz-date", "authorization", "x-api-key", "x-amz-security-token", "x-amz-user-agent"]
+    allow_headers = ["*"]
     allow_methods = ["*"]
     allow_origins = ["*"]
   }
 
   integrations = {
+    "GET /" = {
+      lambda_arn             = module.lambda_function.lambda_function_arn
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 3000
+    }
+    "GET /todos" = {
+      lambda_arn             = module.lambda_function.lambda_function_arn
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 10000
+    }
+    "POST /todos" = {
+      lambda_arn             = module.lambda_function.lambda_function_arn
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 10000
+    }
+    "DELETE /todos" = {
+      lambda_arn             = module.lambda_function.lambda_function_arn
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 10000
+    }
     "$default" = {
       lambda_arn = module.lambda_function.lambda_function_arn
     }
