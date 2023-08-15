@@ -40,3 +40,16 @@ func CreateToDo(c *fiber.Ctx) error {
 
 	return c.Status(fiber.StatusCreated).JSON(fiber.Map{"id": id, "title": toDo.Title})
 }
+
+func DeleteToDo(c *fiber.Ctx) error {
+	id := c.Params("id")
+	if _, err := uuid.Parse(id); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "It is not a valid UUID",
+		})
+	}
+
+	return c.Status(fiber.StatusNoContent).JSON(fiber.Map{
+		"id": id,
+	})
+}

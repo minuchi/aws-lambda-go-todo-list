@@ -17,6 +17,7 @@ func setUpRoutes(app *fiber.App) {
 	app.Get("/", handlers.GetHealth)
 	app.Get("/todos", handlers.GetToDos)
 	app.Post("/todos", handlers.CreateToDo)
+	app.Delete("/todos/:id", handlers.DeleteToDo)
 }
 
 func setLogger(app *fiber.App) {
