@@ -98,4 +98,4 @@ terraform.rc
 tmp/
 .envrc
 bootstrap
-lambda-handler.zip
+*lambda-handler.zip

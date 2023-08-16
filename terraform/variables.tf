@@ -3,6 +3,11 @@ variable "region" {
   default     = "ap-northeast-2"
 }
 
+variable "s3_bucket" {
+  description = "S3 bucket name to store lambda code"
+  default     = "lambda-builds"
+}
+
 variable "lambda_function_name" {
   description = "Lambda function name"
   default     = "todo-list"

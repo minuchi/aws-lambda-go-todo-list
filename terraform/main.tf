@@ -2,6 +2,19 @@ provider "aws" {
   region = var.region
 }
 
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+  upper   = false
+}
+
+module "s3_bucket" {
+  source  = "terraform-aws-modules/s3-bucket/aws"
+  version = "3.14.1"
+
+  bucket = "${var.s3_bucket}-${var.region}-${random_string.suffix.result}"
+}
+
 module "lambda_function" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "5.3.0"
@@ -11,8 +24,11 @@ module "lambda_function" {
   handler       = "bootstrap"
   runtime       = "go1.x"
 
-  create_package         = false
-  local_existing_package = "../lambda-handler.zip"
+  create_package = false
+  s3_existing_package = {
+    bucket = module.s3_bucket.s3_bucket_id
+    key    = "todo-list-lambda-handler.zip"
+  }
 
   create_unqualified_alias_allowed_triggers = true
 

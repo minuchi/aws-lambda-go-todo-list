@@ -8,13 +8,13 @@ dev:
 	air
 
 zip:
-	zip lambda-handler.zip bootstrap
+	zip todo-list-lambda-handler.zip bootstrap
 
 clean:
-	rm -rf bootstrap lambda-handler.zip
+	rm -rf bootstrap todo-list-lambda-handler.zip
 
 deploy:
-	aws lambda update-function-code --function-name todo-list --zip-file fileb://./lambda-handler.zip
+	aws s3 cp todo-list-lambda-handler.zip s3://$(AWS_BUCKET)/
 
 test:
 	go test -v ./...

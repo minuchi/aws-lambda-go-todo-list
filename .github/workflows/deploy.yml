@@ -15,7 +15,6 @@ on:
 
 env:
   GO_VERSION: 1.21.0-rc.4
-  LAMBDA_FUNCTION_NAME: todo-list
 
 jobs:
   deploy:
@@ -47,5 +46,6 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          AWS_BUCKET: ${{ secrets.AWS_BUCKET }}
         run: |
-          aws lambda update-function-code --function-name ${{ env.LAMBDA_FUNCTION_NAME }} --zip-file fileb://$PWD/lambda-handler.zip
+          make deploy
