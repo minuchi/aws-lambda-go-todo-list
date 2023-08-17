@@ -64,28 +64,10 @@ module "api_gateway" {
   }
 
   integrations = {
-    "GET /" = {
-      lambda_arn             = module.lambda_function.lambda_function_arn
-      payload_format_version = "2.0"
-      timeout_milliseconds   = 3000
-    }
-    "GET /todos" = {
+    "ANY /{proxy+}" = {
       lambda_arn             = module.lambda_function.lambda_function_arn
       payload_format_version = "2.0"
       timeout_milliseconds   = 10000
-    }
-    "POST /todos" = {
-      lambda_arn             = module.lambda_function.lambda_function_arn
-      payload_format_version = "2.0"
-      timeout_milliseconds   = 10000
-    }
-    "DELETE /todos" = {
-      lambda_arn             = module.lambda_function.lambda_function_arn
-      payload_format_version = "2.0"
-      timeout_milliseconds   = 10000
-    }
-    "$default" = {
-      lambda_arn = module.lambda_function.lambda_function_arn
     }
   }
 

@@ -1,3 +1,5 @@
+ZIP_FILENAME=todo-list-lambda-handler.zip
+
 install:
 	go install github.com/cosmtrek/air@latest
 
@@ -8,13 +10,14 @@ dev:
 	air
 
 zip:
-	zip todo-list-lambda-handler.zip bootstrap
+	zip $(ZIP_FILENAME) bootstrap
 
 clean:
-	rm -rf bootstrap todo-list-lambda-handler.zip
+	rm -rf bootstrap $(ZIP_FILENAME)
 
 deploy:
-	aws s3 cp todo-list-lambda-handler.zip s3://$(AWS_BUCKET)/
+	aws s3 cp $(ZIP_FILENAME) s3://$(AWS_BUCKET)/ && \
+	aws lambda update-function-code --function-name todo-list --s3-bucket $(AWS_BUCKET) --s3-key $(ZIP_FILENAME)
 
 test:
 	go test -v ./...
