@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
+	"os"
+
 	"github.com/minuchi/aws-lambda-go-todo-list/pkg/middlewares"
 	"github.com/minuchi/aws-lambda-go-todo-list/pkg/routes"
-	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"

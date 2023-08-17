@@ -28,13 +28,13 @@ func CreateToDo(c *fiber.Ctx) error {
 	toDo := new(ToDo)
 	if err := c.BodyParser(toDo); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": err.Error(),
+			"message": err.Error(),
 		})
 	}
 
 	if toDo.Title == "" {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "Missing title",
+			"message": "Missing title",
 		})
 	}
 
@@ -45,7 +45,7 @@ func DeleteToDo(c *fiber.Ctx) error {
 	id := c.Params("id")
 	if _, err := uuid.Parse(id); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
-			"error": "It is not a valid UUID",
+			"message": "It is not a valid UUID",
 		})
 	}
 
