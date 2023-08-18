@@ -99,3 +99,4 @@ tmp/
 .envrc
 bootstrap
 *lambda-handler.zip
+!terraform/*lambda-handler.zip

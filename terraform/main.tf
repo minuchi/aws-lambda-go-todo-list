@@ -15,6 +15,12 @@ module "s3_bucket" {
   bucket = "${var.s3_bucket}-${var.region}-${random_string.suffix.result}"
 }
 
+resource "aws_s3_object" "lambda_handler" {
+  bucket = module.s3_bucket.s3_bucket_id
+  key    = "todo-list-lambda-handler.zip"
+  source = "todo-list-lambda-handler.zip"
+}
+
 module "lambda_function" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "5.3.0"
