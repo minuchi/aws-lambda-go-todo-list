@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	fiberadapter "github.com/awslabs/aws-lambda-go-api-proxy/fiber"
 	"os"
 
 	"github.com/minuchi/aws-lambda-go-todo-list/pkg/middlewares"
@@ -10,7 +11,6 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/gofiber/fiber/v2"
-	"github.com/minuchi/aws-lambda-go-todo-list/pkg/fiberadapter"
 	"github.com/minuchi/aws-lambda-go-todo-list/pkg/utils"
 )
 

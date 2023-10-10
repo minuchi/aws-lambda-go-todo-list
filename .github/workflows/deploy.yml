@@ -14,7 +14,7 @@ on:
       - .github/workflows/deploy.yml
 
 env:
-  GO_VERSION: 1.21.0-rc.4
+  GO_VERSION: 1.21.0
 
 jobs:
   deploy:
