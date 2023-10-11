@@ -17,8 +17,8 @@ module "s3_bucket" {
 
 resource "aws_s3_object" "lambda_handler" {
   bucket = module.s3_bucket.s3_bucket_id
-  key    = "todo-list-lambda-handler.zip"
-  source = "todo-list-lambda-handler.zip"
+  key    = "lambda-handler.zip"
+  source = "lambda-handler.zip"
 }
 
 module "lambda_function" {
@@ -33,7 +33,7 @@ module "lambda_function" {
   create_package = false
   s3_existing_package = {
     bucket = module.s3_bucket.s3_bucket_id
-    key    = "todo-list-lambda-handler.zip"
+    key    = "lambda-handler.zip"
   }
 
   create_unqualified_alias_allowed_triggers = true

@@ -1,4 +1,4 @@
-ZIP_FILENAME=todo-list-lambda-handler.zip
+ZIP_FILENAME=lambda-handler.zip
 
 install:
 	go install github.com/cosmtrek/air@latest
