@@ -28,7 +28,7 @@ module "lambda_function" {
   function_name = var.lambda_function_name
   description   = var.lambda_function_description
   handler       = "bootstrap"
-  runtime       = "go1.x"
+  runtime       = "provided.al2"
 
   create_package = false
   s3_existing_package = {
