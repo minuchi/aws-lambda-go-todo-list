@@ -39,7 +39,7 @@ jobs:
 
       - name: Build Go
         run: |
-          make build && make zip
+          make build-linux-arm64 && make zip
 
       - name: Deploy
         env:

@@ -29,6 +29,7 @@ module "lambda_function" {
   description   = var.lambda_function_description
   handler       = "bootstrap"
   runtime       = "provided.al2"
+  architectures = ["arm64"]
 
   create_package = false
   s3_existing_package = {
